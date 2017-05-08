@@ -10,10 +10,12 @@ import { FooterComponent } from './footer/footer.component';
 import { LeftsidebarComponent } from './leftsidebar/leftsidebar.component';
 import { RightsidebarComponent } from './rightsidebar/rightsidebar.component';
 import { PanelComponent } from './panel/panel.component';
+import { AddarticleComponent } from './addarticle/addarticle.component';
 
 const routes: Routes = [
-  { path: '', component: PanelComponent },
-  { path: '**', redirectTo: '', pathMatch: 'full' }
+  { path: 'dashboard', component: PanelComponent },
+  { path:'addarticle', component: AddarticleComponent},
+  { path: '**', redirectTo: '/dashboard', pathMatch: 'full' }
 ];
 
 @NgModule({
@@ -23,7 +25,8 @@ const routes: Routes = [
     FooterComponent,
     LeftsidebarComponent,
     RightsidebarComponent,
-    PanelComponent
+    PanelComponent,
+    AddarticleComponent
   ],
   imports: [
     BrowserModule,
