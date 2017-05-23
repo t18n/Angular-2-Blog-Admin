@@ -1,0 +1,17 @@
+
+<form>
+
+  <div class="imgcontainer">
+    <i class="fa fa-user fa-5x" aria-hidden="true"></i>
+  </div>
+
+  <div class="container">
+    <label><b>Username</b></label>
+    <input type="text" [(ngModel)]="loginData.username" name="uname" required>
+
+    <label><b>Password</b></label>
+    <input type="password" [(ngModel)]="loginData.password" name="psw" required>
+        
+    <button type="submit" onsubmit="login()" (click)="login()">Login</button>
+  </div>
+</form>

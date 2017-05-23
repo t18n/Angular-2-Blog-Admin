@@ -1,3 +1,4 @@
+<div *ngIf="app.isLoggedIn == true">
 	<aside id="sidebar" class="column">
 		<form class="quick_search">
 			<input type="text" value="Quick Search" onfocus="if(!this._haschanged){this.value=''};this._haschanged=true;">
@@ -30,10 +31,12 @@
 			<li class="icn_security"><a href="#">Security</a></li>
 			<li class="icn_jump_back"><a href="#">Logout</a></li>
 		</ul>
-		
+
 		<footer>
 			<hr />
 			<p><strong>Copyright &copy; 2011 Website Admin</strong></p>
 			<p>Theme by <a href="http://www.medialoot.com">MediaLoot</a></p>
 		</footer>
-	</aside><!-- end of sidebar -->
+	</aside>
+	<!-- end of sidebar -->
+</div>
