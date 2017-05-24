@@ -10,10 +10,18 @@ import 'rxjs/add/operator/catch';
 export class ArticleService {
     constructor(private http: HttpClient) { }
 
-    //   public getArticles() {
-    //    return this.http.get('posts')
-    //       .map(res => res.json().data);
-    //   }
+  /**
+   * Gets the list of all articles
+   */
+  public getArticles() {
+   return this.http.get('http://api.sowable.com/posts')
+      .map(res => res.json().data);
+  }
+
+  public getArticle(id){
+   return this.http.get('http://api.sowable.com/posts/' + id)
+      .map(res => res.json().data);
+  }
 
     // Post new article
     public addArticle(articleData) {

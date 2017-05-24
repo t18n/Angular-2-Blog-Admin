@@ -1,36 +1,50 @@
+<section id="main" class="column">
 
-    <section id="main" class="column">
-    <article class="module width_full">
-			<header><h3>Post New Article</h3></header>
-				<div class="module_content">
-						<fieldset>
-							<label>Post Title</label>
-							<input [(ngModel)]="articleData.title" type="text">
-						</fieldset>
-						<fieldset>
-							<label>Content</label>
-							 <div name="content"  id="froala-editor" ></div>
-						</fieldset>
-						<fieldset style="width:48%; float:left; margin-right: 3%;"> <!-- to make two field float next to one another, adjust values accordingly -->
-							<label>Category</label>
-							<select name="cat_id" [(ngModel)]="articleData.category_id" style="width:92%;">
+	<article class="module width_full">
+
+		<header>
+			<h2 *ngIf="message" style="color:white;     background-color:green; padding: 10px;">Article "{{message}}" has been successfully submitted.</h2>
+			<h3>Post New Article</h3>
+		</header>
+		<div class="module_content">
+			<fieldset>
+				<label>Post Title</label>
+				<input [(ngModel)]="articleData.title" type="text">
+			</fieldset>
+			<fieldset>
+				<label>Content</label>
+				<textarea id="{{elementId}}"></textarea>
+				<!--<div contenteditable="true" (input)="articleData.content = $event" name="content" id="froala-editor"></div>-->
+			</fieldset>
+			<fieldset style="width:48%; float:left; margin-right: 3%;">
+				<!-- to make two field float next to one another, adjust values accordingly -->
+				<label>Category</label>
+				<select name="cat_id" [(ngModel)]="articleData.category_id" style="width:92%;">
 								<option value="{{ category.id }}" *ngFor="let category of categories">{{category.name}}</option>
 							</select>
-						</fieldset>
-						<fieldset style="width:48%; float:left;"> <!-- to make two field float next to one another, adjust values accordingly -->
-							<label>Tags</label>
-							<input type="text" style="width:92%;">
-						</fieldset><div class="clear"></div>
-				</div>
-			<footer>
-				<div class="submit_link">
-					<select>
-						<option>Draft</option>
-						<option>Published</option>
+			</fieldset>
+			<fieldset style="width:48%; float:left;">
+				<!-- to make two field float next to one another, adjust values accordingly -->
+				<label>Tags</label>
+				<input type="text" style="width:92%;">
+			</fieldset>
+			<div class="clear"></div>
+		</div>
+		<footer>
+			<div class="submit_link">
+				<select name="status_id" [(ngModel)]="articleData.status">
+						<option value="1">Published</option>
+						<option value="2">Pending Review</option>
+						<option value="3">Private</option>
+						<option value="4">Draft</option>
 					</select>
-					<input type="submit" (click)="addArticle()" value="Publish" class="alt_btn">
-					<input type="submit" value="Reset">
-				</div>
-			</footer>
-		</article><!-- end of post new article -->
-		</section>
+				<input type="submit" (click)="addArticle()" value="Publish" class="alt_btn">
+				<input type="submit" value="Reset">
+			</div>
+		</footer>
+	</article>
+	<!-- end of post new article -->
+</section>
+<script>
+
+</script>

@@ -1,24 +1,29 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewInit, EventEmitter, Input, Output } from '@angular/core';
 import { ArticleService } from './../article/article.service';
 import { ADDARTICLEDATA } from './../article/addarticledata';
 import { CategoryService } from './../article/category.service';
-declare var $: any;
+
+declare var tinymce: any;
 
 @Component({
   selector: 'app-addarticle',
   templateUrl: './addarticle.component.html',
   styleUrls: ['./addarticle.component.css'],
-  providers:[ArticleService, CategoryService]
+  providers: [ArticleService, CategoryService]
 })
 
 
 export class AddarticleComponent implements OnInit {
 
+  
+  editor;
+  public message: string;
   public categories: any;
   public articleData: ADDARTICLEDATA = new ADDARTICLEDATA();
-  public error:string;
+  public error: string;
+  public elementId: string = "tinymce";
   constructor(
-    private articleService : ArticleService,
+    private articleService: ArticleService,
     private categoryService: CategoryService
   ) { }
 
@@ -27,23 +32,37 @@ export class AddarticleComponent implements OnInit {
 
   }
 
-  // ngAfterViewChecked() {
-  //   $(function () {
-  //     $('div#froala-editor').froalaEditor({
-  //       toolbarButtons: ['bold', 'italic', 'underline', 'strikeThrough', 'subscript', 'superscript', 'fontFamily', 'fontSize', '|', 'specialCharacters', 'color', 'emoticons', 'inlineStyle', 'paragraphStyle', '|', 'paragraphFormat', 'align', 'formatOL', 'formatUL', 'outdent', 'indent', '-', 'quote', 'insertHR', 'insertLink', 'insertImage', 'insertVideo', 'insertFile', 'insertTable', '|', 'undo', 'redo', 'clearFormatting', 'selectAll', 'html', 'applyFormat', 'removeFormat', 'fullscreen', 'print', 'help'],
-  //       pluginsEnabled: null
-  //     })
-  //   });
-  // }
+  ngAfterViewInit() {
+    tinymce.init({
+      selector: '#' + this.elementId,
+      plugins: ['link', 'paste', 'table'],
+      skin_url: './../../../node_modules/tinymce/skins/lightgray',
+      setup: editor => {
+        this.editor = editor;
+        editor.on('keyup', () => {
+          const content = editor.getContent();
+          this.articleData.content = content;
+        });
+      },
+    });
+  }
 
-  addArticle(){
+  ngOnDestroy() {
+    tinymce.remove(this.editor);
+  }
+
+  addArticle() {
     console.log(localStorage.getItem('authadminToken'));
+    console.log(this.articleData.content);
     this.articleService.addArticle(this.articleData).subscribe(
-      error => this.error = error.json().error
+      data => {
+        this.articleData = data;
+        this.message = this.articleData.title;
+      }
     );
   }
 
-  getCategories(){
+  getCategories() {
     this.categoryService.getCategories().subscribe(
       data => this.categories = data,
       error => this.error = error.json().error

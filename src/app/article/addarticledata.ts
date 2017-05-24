@@ -1,7 +1,7 @@
 export class ADDARTICLEDATA{
     title: string = '';
-    content: string = 'This is a body of the article.This is a body of the article.This is a body of the article.This is a body of the article.This is a body of the article.This is a body of the article.This is a body of the article.This is a body of the article.This is a body of the article.This is a body of the article.This is a body of the article.This is a body of the article.This is a body of the article.This is a body of the article.This is a body of the article.This is a body of the article.This is a body of the article.';
-    status: number = 3;
+    content: string = '';
+    status: number = 0;
     slug: string = 'test-create-method';
     recommends: number = 1;
     rating: number = 5;
