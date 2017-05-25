@@ -1,9 +1,24 @@
-	<!--<header id="header">
+<div *ngIf="app.isLoggedIn == true">
+	<header id="header">
 		<div>
 			<h1 class="site_title"><a href="index.html">Website Admin</a></h1>
-			<h2 class="section_title">Dashboard</h2><div class="btn_view_site"><a href="http://www.medialoot.com">View Site</a></div>
+			<h2 class="section_title">Dashboard</h2>
+			<div class="btn_view_site"><a style="cursor: pointer;" (click)="logOut()">LogOut</a></div>
 		</div>
-    
-	</header> <!-- end of header bar -->
-  
-	
+
+	</header>
+	<!-- end of header bar -->
+	<section id="secondary_bar">
+		<div class="user">
+			<p>{{userinfo.name}} (<a href="#">3 Messages</a>)</p>
+			<!-- <a class="logout_user" href="#" title="Logout">Logout</a> -->
+		</div>
+		<div class="breadcrumbs_container">
+			<article class="breadcrumbs"><a href="index.html">Website Admin</a>
+				<div class="breadcrumb_divider"></div> <a class="current">Dashboard</a></article>
+		</div>
+	</section>
+	<!-- end of secondary bar -->
+
+
+</div>

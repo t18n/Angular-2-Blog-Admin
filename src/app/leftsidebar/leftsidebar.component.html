@@ -1,4 +1,6 @@
 <div *ngIf="app.isLoggedIn == true">
+
+
 	<aside id="sidebar" class="column">
 		<form class="quick_search">
 			<input type="text" value="Quick Search" onfocus="if(!this._haschanged){this.value=''};this._haschanged=true;">
@@ -7,8 +9,8 @@
 		<h3>Content</h3>
 		<ul class="toggle">
 			<li><i class="fa fa-newspaper-o" aria-hidden="true"></i><a routerLink="/dashboard">Dashboard</a></li>
-			<li class="icn_new_article"><a routerLink="/addarticle">New Article</a></li>
-			<li class="icn_edit_article"><a href="#">Edit Articles</a></li>
+			<li class="icn_new_article"><a routerLink="/addarticle/add">New Article</a></li>
+			<li class="icn_edit_article"><a routerLink="/addarticle/16">Edit Articles</a></li>
 			<li class="icn_categories"><a href="#">Categories</a></li>
 			<li class="icn_tags"><a href="#">Tags</a></li>
 		</ul>

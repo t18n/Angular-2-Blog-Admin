@@ -34,8 +34,8 @@ export class DefaultRequestOptions extends BaseRequestOptions {
 
 const routes: Routes = [
   { path: 'dashboard', component: PanelComponent },
-  { path: 'addarticle', component: AddarticleComponent },
-  { path: 'login', component: LoginComponent },
+  { path: 'addarticle/:todo', component: AddarticleComponent },
+  { path: '', component: LoginComponent },
   { path: '**', redirectTo: '/dashboard', pathMatch: 'full' }
 ];
 

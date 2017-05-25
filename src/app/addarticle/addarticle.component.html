@@ -4,7 +4,9 @@
 
 		<header>
 			<h2 *ngIf="message" style="color:white;     background-color:green; padding: 10px;">Article "{{message}}" has been successfully submitted.</h2>
-			<h3>Post New Article</h3>
+			<div *ngIf="this.content_id == 'add';then addheading else editheading">here is ignored</div>
+			<ng-template #addheading><h3>Post New Article</h3></ng-template>
+			<ng-template #editheading><h3>Edit Article</h3></ng-template>
 		</header>
 		<div class="module_content">
 			<fieldset>
@@ -29,6 +31,12 @@
 				<input type="text" style="width:92%;">
 			</fieldset>
 			<div class="clear"></div>
+			<fieldset style="width:48%; float:left;">
+				<!-- to make two field float next to one another, adjust values accordingly -->
+				<label>Created Date</label>
+				<input type="date" [(ngModel)]="articleData.created_at" style="width:92%;">
+			</fieldset>
+			<div class="clear"></div>
 		</div>
 		<footer>
 			<div class="submit_link">
@@ -38,7 +46,9 @@
 						<option value="3">Private</option>
 						<option value="4">Draft</option>
 					</select>
-				<input type="submit" (click)="addArticle()" value="Publish" class="alt_btn">
+				<div *ngIf="this.content_id == 'add';then addbutton else editbutton">here is ignored</div>
+				<ng-template #addbutton><input type="submit"  (click)="addArticle()" value="Publish" class="alt_btn"></ng-template>
+				<ng-template #editbutton><input type="submit"  (click)="addArticle()" value="Update" class="alt_btn"></ng-template>
 				<input type="submit" value="Reset">
 			</div>
 		</footer>

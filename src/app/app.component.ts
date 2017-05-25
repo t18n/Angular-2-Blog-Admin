@@ -7,7 +7,7 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  private _isLoggedIn: boolean = false;
+  private _isLoggedIn: boolean = false; //setting it true for now.. will change to false when everything done
   private _userPartyId: string = '';
 
   public supportedLangs: any[];

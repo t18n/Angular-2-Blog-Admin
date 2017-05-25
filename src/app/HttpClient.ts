@@ -11,6 +11,10 @@ export class HttpClient extends Http {
     setAccessToken(token: string): void {
         localStorage.setItem('authadminToken', token);
     }
+
+    setUserID(id: string): void{
+      localStorage.setItem('userID', id);
+    }
     
     public deleteWithBody(url: string, data) {
       let options = new RequestOptions({ 

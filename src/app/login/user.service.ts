@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs';
 import { LoginData } from './login';
 import { HttpClient } from './../HttpClient';
@@ -30,6 +29,7 @@ export class UserService {
     logout() {
         this.app.isLoggedIn = false;
         this.setAccessToken('');
+        this.setUserID('');
         this.router.navigateByUrl('/');
     }
 
@@ -45,6 +45,10 @@ export class UserService {
 
     setAccessToken(token: string): void {
         this.http.setAccessToken(token);
+    }
+
+    setUserID(id: string): void{
+        this.http.setUserID(id);
     }
 
     public getUserInfo() {
