@@ -9,4 +9,5 @@ export class ADDARTICLEDATA{
     user_id: number = 3;
     created_at: string = '';
     updated_at: string = '';
+    slug: string = '';
 }

@@ -13,6 +13,8 @@ import { RightsidebarComponent } from './rightsidebar/rightsidebar.component';
 import { PanelComponent } from './panel/panel.component';
 import { AddarticleComponent } from './addarticle/addarticle.component';
 import { LoginComponent } from './login/login.component';
+import { CategoryComponent } from './category/category.component';
+import {AccordionModule} from "ng2-accordion";
 
 export function httpClientFactory(backend: XHRBackend, defaultOptions: RequestOptions) {
   return new HttpClient(backend, defaultOptions);
@@ -24,7 +26,7 @@ export class DefaultRequestOptions extends BaseRequestOptions {
   merge(options?: RequestOptionsArgs): RequestOptions {
     var newOptions = super.merge(options);
     newOptions.headers.set('Authorization', localStorage.getItem('authadminToken'));
-    //newOptions.headers.set('Accept', 'application/json');
+    newOptions.headers.set('Accept', 'application/json');
     newOptions.headers.set('Content-Type', 'application/json');
 
 
@@ -35,6 +37,7 @@ export class DefaultRequestOptions extends BaseRequestOptions {
 const routes: Routes = [
   { path: 'dashboard', component: PanelComponent },
   { path: 'addarticle/:todo', component: AddarticleComponent },
+  { path: 'category', component: CategoryComponent},
   { path: '', component: LoginComponent },
   { path: '**', redirectTo: '/dashboard', pathMatch: 'full' }
 ];
@@ -48,12 +51,14 @@ const routes: Routes = [
     RightsidebarComponent,
     PanelComponent,
     AddarticleComponent,
-    LoginComponent
+    LoginComponent,
+    CategoryComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
+    AccordionModule,
     RouterModule.forRoot(routes)
   ],
   exports: [RouterModule],

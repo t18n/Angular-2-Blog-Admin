@@ -34,7 +34,7 @@
 		</div>
 	</article>
 	<!-- end of stats article -->
-
+<h4 *ngIf="message"  class="alert_success">{{message}}</h4>
 	<article class="module width_3_quarter">
 		<header>
 			<h3 class="tabs_involved">Content Manager</h3>
@@ -62,7 +62,7 @@
 							<td>{{article.title}}</td>
 							<td>{{article.category_id}}</td>
 							<td>{{article.created_at}}</td>
-							<td><input type="image" src="assets/images/icn_edit.png" title="Edit"><input type="image" src="assets/images/icn_trash.png" title="Trash"></td>
+							<td><a routerLink="/addarticle/{{article.id}}"><input type="image" src="assets/images/icn_edit.png" title="Edit"></a><a (click)="deleteArticle(article.id,article.title)"><input  type="image" src="assets/images/icn_trash.png" title="Trash"></a></td>
 						</tr>
 					</tbody>
 				</table>

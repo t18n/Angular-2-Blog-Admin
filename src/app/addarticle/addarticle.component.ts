@@ -18,6 +18,7 @@ export class AddarticleComponent implements OnInit {
 
 
   editor;
+  public notchangedarticleData: any;
   public content_id: string;
   public message: string;
   public categories: any;
@@ -34,7 +35,6 @@ export class AddarticleComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.content_id = (params['todo'])
-      console.log(this.content_id);
       if (this.content_id !== "add") {
         this.loadArticle(this.content_id);
       }
@@ -64,12 +64,13 @@ export class AddarticleComponent implements OnInit {
 
   addArticle() {
     this.articleData.user_id = parseInt(localStorage.getItem('userID'));
-    this.articleData.updated_at = this.customFunctions.transformDate(Date());
-    console.log(this.articleData.content);
+    this.articleData.updated_at = this.customFunctions.transformDateforupdate(Date());
+    this.articleData.created_at = this.customFunctions.transformDateforupdate(Date());
     this.articleService.addArticle(this.articleData).subscribe(
       data => {
         this.articleData = data;
         this.message = this.articleData.title;
+        this.articleData.created_at = this.customFunctions.transformDateforview(Date());
       }
     );
   }
@@ -85,15 +86,56 @@ export class AddarticleComponent implements OnInit {
     this.articleService.getArticle(id).subscribe(
       data => {
         this.articleData = data;
-        tinymce.init({
-          selector: '#' + this.elementId,
-          setup: editor => {
-            this.editor = editor;
-              editor.setContent(this.articleData.content);
-          },
-        });
+        tinymce.get(this.elementId).setContent(this.articleData.content);
+        this.articleData.created_at = this.customFunctions.transformDateforview(Date());
       }
     )
+    this.loadarticlefordefault(this.content_id);
+  }
+
+  loadarticlefordefault(id) {
+    this.articleService.getArticle(id).subscribe(
+      data => {
+        this.notchangedarticleData = data;
+      }
+    )
+  }
+  deleteiteminjson(todelete) {
+    delete (this.articleData[todelete]);
+  }
+  updateArticle() {
+    this.articleData.created_at = this.customFunctions.transformDateforupdate(Date());
+    this.articleData.updated_at = this.customFunctions.transformDateforupdate(Date());
+    this.deleteiteminjson('slug');
+    this.deleteiteminjson('updated_at');
+    if (this.notchangedarticleData.title == this.articleData.title) {
+      this.deleteiteminjson('title');
+    }
+    if (this.notchangedarticleData.content == this.articleData.content) {
+      this.deleteiteminjson('content');
+    }
+    if (this.notchangedarticleData.status == this.articleData.status) {
+      this.deleteiteminjson('status');
+    }
+    if (this.notchangedarticleData.category_id == this.articleData.category_id) {
+      this.deleteiteminjson('category_id');
+    }
+    if (this.notchangedarticleData.user_id == this.articleData.user_id) {
+      this.deleteiteminjson('user_id');
+    }
+    if (this.notchangedarticleData.created_at == this.articleData.created_at) {
+      this.deleteiteminjson('created_at');
+    }
+
+    this.articleService.updateArticle(this.content_id, this.articleData).subscribe(
+      data => {
+        this.articleData = data;
+        this.message = this.articleData.title;
+        this.loadarticlefordefault(this.content_id);
+        this.articleData.created_at = this.customFunctions.transformDateforview(Date());
+      }
+    )
+    
   }
 
 }
