@@ -11,7 +11,7 @@ export class LeftsidebarComponent implements OnInit {
 
 
 
-  constructor(private app: AppComponent) { }
+  constructor(public app: AppComponent) { }
 
   ngOnInit() {
   }

@@ -6,13 +6,23 @@ import 'rxjs/add/operator/catch';
 
 
 @Injectable()
-export class CategoryService { 
-constructor(private http: Http) { }
+export class CategoryService {
+  constructor(private http: Http) { }
   /**
    * Gets the list of all articles
    */
   public getCategories() {
-   return this.http.get('http://api.sowable.com/categories')
-      .map(res => res.json());
+    return this.http.get('http://api.sowable.com/categories')
+      .map(res => res.json().data);
+  }
+
+  public deleteCategory(type, id) {
+    return this.http.delete('http://api.sowable.com/categories/'+ id)
+      .map(res => res.json().data);
+  }
+
+  public editCategory(type, id) {
+    return this.http.get('http://api.sowable.com/categories')
+      .map(res => res.json().data);
   }
 }
